@@ -175,10 +175,10 @@ func NewEmptyEmitter() *EmptyEmitter {
 	return new(EmptyEmitter)
 }
 
-// Does nothing. Ignores given message.
+// Emit Does nothing. Ignores given message.
 func (e *EmptyEmitter) Emit(*avro.LogLine) {}
 
-// Does nothing.
+// Close Does nothing.
 func (e *EmptyEmitter) Close() {}
 
 func newLogLine(source string, logtypeid int64, line string, tags map[string]string) *avro.LogLine {

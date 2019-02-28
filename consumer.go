@@ -106,20 +106,20 @@ func (c *Consumer) String() string {
 	return c.config.Consumerid
 }
 
-/* Starts consuming specified topics using a configured amount of goroutines for each topic. */
+/* StartStatic starts consuming specified topics using a configured amount of goroutines for each topic. */
 func (c *Consumer) StartStatic(topicCountMap map[string]int) {
 	go c.createMessageStreams(topicCountMap)
 
 	c.startStreams()
 }
 
-/* Starts consuming all topics which correspond to a given topicFilter using numStreams goroutines for each topic. */
+/* StartWildcard starts consuming all topics which correspond to a given topicFilter using numStreams goroutines for each topic. */
 func (c *Consumer) StartWildcard(topicFilter TopicFilter, numStreams int) {
 	go c.createMessageStreamsByFilterN(topicFilter, numStreams)
 	c.startStreams()
 }
 
-/* Starts consuming given topic-partitions using ConsumerConfig.NumConsumerFetchers goroutines for each topic. */
+/* StartStaticPartitions starts consuming given topic-partitions using ConsumerConfig.NumConsumerFetchers goroutines for each topic. */
 func (c *Consumer) StartStaticPartitions(topicPartitionMap map[string][]int32) {
 	topicsToNumStreamsMap := make(map[string]int)
 	for topic := range topicPartitionMap {
@@ -937,7 +937,7 @@ func (c *Consumer) releasePartitionOwnership(localtopicRegistry map[string]map[i
 	}
 }
 
-// Returns a state snapshot for this consumer. State snapshot contains a set of metrics splitted by topics and partitions.
+// StateSnapshot returns a state snapshot for this consumer. State snapshot contains a set of metrics splitted by topics and partitions.
 func (c *Consumer) StateSnapshot() *StateSnapshot {
 	metricsMap := c.metrics.Stats()
 

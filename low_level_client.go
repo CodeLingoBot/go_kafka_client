@@ -68,7 +68,7 @@ func NewSiestaClient(config *ConsumerConfig) *SiestaClient {
 	}
 }
 
-// Returns a string representation of this SiestaClient.
+// String returns a string representation of this SiestaClient.
 func (this *SiestaClient) String() string {
 	return "Siesta client"
 }
@@ -164,7 +164,7 @@ func (this *SiestaClient) GetAvailableOffset(topic string, partition int32, offs
 	return this.connector.GetAvailableOffset(topic, partition, time)
 }
 
-// Gets the offset for a given group, topic and partition.
+// GetOffset gets the offset for a given group, topic and partition.
 // May return an error if fails to retrieve the offset.
 func (this *SiestaClient) GetOffset(group string, topic string, partition int32) (int64, error) {
 	offset, err := this.connector.GetOffset(group, topic, partition)

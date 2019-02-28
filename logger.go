@@ -83,7 +83,7 @@ var logLevelPriorities = map[LogLevel]int{
 	CriticalLevel: 5,
 }
 
-//Writes a given message with a given tag to log with level Trace.
+//Trace writes a given message with a given tag to log with level Trace.
 func Trace(tag interface{}, message interface{}) {
 	Logger.Trace(fmt.Sprintf("[%s] %s", tag, message))
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), TraceLogTypeId, fmt.Sprintf("%s", message), nil))
@@ -95,7 +95,7 @@ func Tracef(tag interface{}, message interface{}, params ...interface{}) {
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), TraceLogTypeId, fmt.Sprintf(fmt.Sprintf("%s", message), params...), nil))
 }
 
-//Writes a given message with a given tag to log with level Debug.
+//Debug writes a given message with a given tag to log with level Debug.
 func Debug(tag interface{}, message interface{}) {
 	Logger.Debug(fmt.Sprintf("[%s] %s", tag, message))
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), DebugLogTypeId, fmt.Sprintf("%s", message), nil))
@@ -107,7 +107,7 @@ func Debugf(tag interface{}, message interface{}, params ...interface{}) {
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), DebugLogTypeId, fmt.Sprintf(fmt.Sprintf("%s", message), params...), nil))
 }
 
-//Writes a given message with a given tag to log with level Info.
+//Info writes a given message with a given tag to log with level Info.
 func Info(tag interface{}, message interface{}) {
 	Logger.Info(fmt.Sprintf("[%s] %s", tag, message))
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), InfoLogTypeId, fmt.Sprintf("%s", message), nil))
@@ -119,7 +119,7 @@ func Infof(tag interface{}, message interface{}, params ...interface{}) {
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), InfoLogTypeId, fmt.Sprintf(fmt.Sprintf("%s", message), params...), nil))
 }
 
-//Writes a given message with a given tag to log with level Warn.
+//Warn writes a given message with a given tag to log with level Warn.
 func Warn(tag interface{}, message interface{}) {
 	Logger.Warn(fmt.Sprintf("[%s] %s", tag, message))
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), WarnLogTypeId, fmt.Sprintf("%s", message), nil))
@@ -131,7 +131,7 @@ func Warnf(tag interface{}, message interface{}, params ...interface{}) {
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), WarnLogTypeId, fmt.Sprintf(fmt.Sprintf("%s", message), params...), nil))
 }
 
-//Writes a given message with a given tag to log with level Error.
+//Error writes a given message with a given tag to log with level Error.
 func Error(tag interface{}, message interface{}) {
 	Logger.Error(fmt.Sprintf("[%s] %s", tag, message))
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), ErrorLogTypeId, fmt.Sprintf("%s", message), nil))
@@ -143,7 +143,7 @@ func Errorf(tag interface{}, message interface{}, params ...interface{}) {
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), ErrorLogTypeId, fmt.Sprintf(fmt.Sprintf("%s", message), params...), nil))
 }
 
-//Writes a given message with a given tag to log with level Critical.
+//Critical writes a given message with a given tag to log with level Critical.
 func Critical(tag interface{}, message interface{}) {
 	Logger.Critical(fmt.Sprintf("[%s] %s", tag, message))
 	EmitterLogs.Emit(newLogLine(fmt.Sprintf("%s", tag), CriticalLogTypeId, fmt.Sprintf("%s", message), nil))

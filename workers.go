@@ -89,7 +89,7 @@ func (wm *WorkerManager) String() string {
 	return wm.id
 }
 
-// Starts processing incoming batches with this WorkerManager. Processing is possible only in batch-at-once mode.
+// Start starts processing incoming batches with this WorkerManager. Processing is possible only in batch-at-once mode.
 // It also launches an offset committer routine.
 // Call to this method blocks.
 func (wm *WorkerManager) Start() {
@@ -360,7 +360,7 @@ func (wm *WorkerManager) taskIsDone(result WorkerResult) {
 	wm.currentBatch.markDone(result.Id())
 }
 
-// Gets the highest offset that has been processed by this WorkerManager.
+// GetLargestOffset gets the highest offset that has been processed by this WorkerManager.
 func (wm *WorkerManager) GetLargestOffset() int64 {
 	return atomic.LoadInt64(&wm.largestOffset)
 }
@@ -395,7 +395,7 @@ func (w *Worker) String() string {
 	return "worker"
 }
 
-// Starts processing a given task using given strategy with this worker.
+// Start starts processing a given task using given strategy with this worker.
 // Call to this method blocks until the task is done or timed out.
 func (w *Worker) Start() {
 	handlerInterrupted := false
@@ -514,7 +514,7 @@ type Task struct {
 	Callee *Worker
 }
 
-// Returns an id for this Task.
+// Id returns an id for this Task.
 func (t *Task) Id() TaskId {
 	return TaskId{TopicAndPartition{t.Msg.Topic, t.Msg.Partition}, t.Msg.Offset}
 }
@@ -542,7 +542,7 @@ func (sr *SuccessfulResult) String() string {
 	return fmt.Sprintf("{Success: %s}", sr.Id())
 }
 
-// Returns an id of task that was processed.
+// Id returns an id of task that was processed.
 func (wr *SuccessfulResult) Id() TaskId {
 	return wr.id
 }
@@ -566,7 +566,7 @@ func (sr *ProcessingFailedResult) String() string {
 	return fmt.Sprintf("{Failed: %s}", sr.Id())
 }
 
-// Returns an id of task that was processed.
+// Id returns an id of task that was processed.
 func (wr *ProcessingFailedResult) Id() TaskId {
 	return wr.id
 }
@@ -585,7 +585,7 @@ func (sr *TimedOutResult) String() string {
 	return fmt.Sprintf("{Timed out: %s}", sr.Id())
 }
 
-// Returns an id of task that was processed.
+// Id returns an id of task that was processed.
 func (wr *TimedOutResult) Id() TaskId {
 	return wr.id
 }

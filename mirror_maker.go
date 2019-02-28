@@ -96,7 +96,7 @@ func NewMirrorMaker(config *MirrorMakerConfig) *MirrorMaker {
 	}
 }
 
-// Starts the MirrorMaker. This method is blocking and should probably be run in a separate goroutine.
+// Start starts the MirrorMaker. This method is blocking and should probably be run in a separate goroutine.
 func (this *MirrorMaker) Start() {
 	this.initializeMessageChannels()
 	this.startConsumers()

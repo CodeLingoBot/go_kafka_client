@@ -192,7 +192,7 @@ func (this *ZookeeperCoordinator) DeregisterConsumer(Consumerid string, Groupid 
 	return
 }
 
-// Gets the information about consumer with Consumerid id that is a part of consumer group Groupid from this ConsumerCoordinator.
+// GetConsumerInfo gets the information about consumer with Consumerid id that is a part of consumer group Groupid from this ConsumerCoordinator.
 // Returns ConsumerInfo on success and error otherwise (For example if consumer with given Consumerid does not exist).
 func (this *ZookeeperCoordinator) GetConsumerInfo(Consumerid string, Groupid string) (info *ConsumerInfo, err error) {
 	backoffMultiplier := 1
@@ -256,7 +256,7 @@ func fixTimestamp(b json.RawMessage) (int64, error) {
 	return 0, fmt.Errorf("Unable to convert raw value %+v to int64", b)
 }
 
-// Gets the information about consumers per topic in consumer group Groupid excluding internal topics (such as offsets) if ExcludeInternalTopics = true.
+// GetConsumersPerTopic gets the information about consumers per topic in consumer group Groupid excluding internal topics (such as offsets) if ExcludeInternalTopics = true.
 // Returns a map where keys are topic names and values are slices of consumer ids and fetcher ids associated with this topic and error on failure.
 func (this *ZookeeperCoordinator) GetConsumersPerTopic(Groupid string, ExcludeInternalTopics bool) (consumers map[string][]ConsumerThreadId, err error) {
 	backoffMultiplier := 1
@@ -298,7 +298,7 @@ func (this *ZookeeperCoordinator) tryGetConsumersPerTopic(Groupid string, Exclud
 	return consumersPerTopicMap, nil
 }
 
-/* Gets the list of all consumer ids within a consumer group Groupid. Returns a slice containing all consumer ids in group and error on failure. */
+/* GetConsumersInGroup gets the list of all consumer ids within a consumer group Groupid. Returns a slice containing all consumer ids in group and error on failure. */
 func (this *ZookeeperCoordinator) GetConsumersInGroup(Groupid string) (consumers []string, err error) {
 	backoffMultiplier := 1
 	for i := 0; i <= this.config.MaxRequestRetries; i++ {
@@ -324,7 +324,7 @@ func (this *ZookeeperCoordinator) tryGetConsumersInGroup(Groupid string) (consum
 	return
 }
 
-/* Gets the list of all topics registered in this ConsumerCoordinator. Returns a slice conaining topic names and error on failure. */
+/* GetAllTopics gets the list of all topics registered in this ConsumerCoordinator. Returns a slice conaining topic names and error on failure. */
 func (this *ZookeeperCoordinator) GetAllTopics() (topics []string, err error) {
 	backoffMultiplier := 1
 	for i := 0; i <= this.config.MaxRequestRetries; i++ {
@@ -353,7 +353,7 @@ func (this *ZookeeperCoordinator) tryGetAllTopics() (topics []string, err error)
 	return
 }
 
-// Gets the information about existing partitions for a given Topics.
+// GetPartitionsForTopics gets the information about existing partitions for a given Topics.
 // Returns a map where keys are topic names and values are slices of partition ids associated with this topic and error on failure.
 func (this *ZookeeperCoordinator) GetPartitionsForTopics(Topics []string) (partitions map[string][]int32, err error) {
 	backoffMultiplier := 1
@@ -388,7 +388,7 @@ func (this *ZookeeperCoordinator) tryGetPartitionsForTopics(Topics []string) (ma
 	return result, nil
 }
 
-// Gets the information about all Kafka brokers registered in this ConsumerCoordinator.
+// GetAllBrokers gets the information about all Kafka brokers registered in this ConsumerCoordinator.
 // Returns a slice of BrokerInfo and error on failure.
 func (this *ZookeeperCoordinator) GetAllBrokers() (brokers []*BrokerInfo, err error) {
 	backoffMultiplier := 1
@@ -429,7 +429,7 @@ func (this *ZookeeperCoordinator) tryGetAllBrokers() ([]*BrokerInfo, error) {
 	return brokers, nil
 }
 
-// Gets the offset for a given topic, partition and consumer group.
+// GetOffset gets the offset for a given topic, partition and consumer group.
 // Returns offset on sucess, error otherwise.
 func (this *ZookeeperCoordinator) GetOffset(Groupid string, topic string, partition int32) (offset int64, err error) {
 	backoffMultiplier := 1
@@ -577,7 +577,7 @@ func (this *ZookeeperCoordinator) trySubscribeForChanges(Groupid string) (<-chan
 	return groupWatch.coordinatorEvents, nil
 }
 
-// Gets all deployed topics for consume group Group from consumer coordinator.
+// GetBlueGreenRequest gets all deployed topics for consume group Group from consumer coordinator.
 // Returns a map where keys are notification ids and values are DeployedTopics. May also return an error (e.g. if failed to reach coordinator).
 func (this *ZookeeperCoordinator) GetBlueGreenRequest(Group string) (topics map[string]*BlueGreenDeployment, err error) {
 	backoffMultiplier := 1

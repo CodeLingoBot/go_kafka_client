@@ -154,7 +154,7 @@ func (tc *StaticTopicsToNumStreams) GetTopicsToNumStreamsMap() map[string]int {
 	return tc.TopicsToNumStreamsMap
 }
 
-//Returns a pattern describing this TopicsToNumStreams.
+//Pattern returns a pattern describing this TopicsToNumStreams.
 func (tc *StaticTopicsToNumStreams) Pattern() string {
 	return staticPattern
 }
@@ -190,7 +190,7 @@ func (tc *WildcardTopicsToNumStreams) GetTopicsToNumStreamsMap() map[string]int 
 	return result
 }
 
-//Returns a pattern describing this TopicsToNumStreams.
+//Pattern returns a pattern describing this TopicsToNumStreams.
 func (tc *WildcardTopicsToNumStreams) Pattern() string {
 	switch tc.TopicFilter.(type) {
 	case *WhiteList:
